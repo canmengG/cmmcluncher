@@ -204,7 +204,7 @@ class DependencyTests(unittest.TestCase):
 class InstancePlanTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
-        self.root = Path(self.temp.name) / "game"
+        self.root = (Path(self.temp.name) / "game").resolve()
         self.root.mkdir()
         self.archive = Path(self.temp.name) / "pack.mrpack"
         self.index = _make_mrpack(self.archive)
@@ -258,7 +258,7 @@ class InstancePlanTests(unittest.TestCase):
 class LaunchableInstallTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
-        self.root = Path(self.temp.name) / "game"
+        self.root = (Path(self.temp.name) / "game").resolve()
         self.root.mkdir()
         self.archive = Path(self.temp.name) / "pack.mrpack"
         self.index = _make_mrpack(self.archive)

@@ -426,7 +426,7 @@ class SelectVersionTests(unittest.TestCase):
 class FilenameAndPlanTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
-        self.root = Path(self.temp.name) / "game"
+        self.root = (Path(self.temp.name) / "game").resolve()
         self.root.mkdir()
         self.project = _make_project()
         self.version = _make_version()
