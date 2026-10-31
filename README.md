@@ -744,7 +744,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 - 用提供的 Azure client ID 实测 `devicecode` 请求成功（返回 `user_code`/`verification_uri`，15 分钟有效）。真实浏览器登录完成：Microsoft/Xbox/XSTS 均通过，最后 `login_with_xbox` 返回 **HTTP 403**，响应体为 `Invalid app registration, see https://aka.ms/AppRegInfo`。账号截图确认拥有 Minecraft: Java，因此原因是 **Azure 应用未获 Minecraft Services allowlist 批准**，不是账号所有权。未保存令牌。
 - 已把该错误改为明确提示，并记录官方 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process)；需要用户提交 client ID 等待批准后再做成功登录/启动验收。
 - UI 冒烟：主窗口创建、账户行“微软登录…/退出登录”状态正确；登录对话框已创建；成功登录待 allowlist 批准后复验。
-- `.github/workflows/ci.yml` 已加入，但本工作区没有 git 远程仓库，Actions 尚未实际执行；本地 `ci.ps1` 命令与 workflow 的 test job 一致。
+- **GitHub Actions 已实际通过**（run `41205056822`）：Unit tests Python 3.11、Python 3.13、PyInstaller package 三个 job 全部 success。Windows runner 的 `RUNNER~1` 短路径曾导致 6 个内容/整合包路径断言失败，已用 `.resolve()` 统一测试根路径修复。
+- 仓库：<https://github.com/canmengG/cmmcluncher>（公开）；`main` 最新提交已推送。
 
 0.6.3：
 
