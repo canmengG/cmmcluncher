@@ -46,7 +46,7 @@
 - 启动器下载的 Java 17.0.15：`D:\game\_download_test\java-test\java-runtime-gamma\bin\java.exe`（403 文件 / 86.9 MB）。
 - 网络：Mojang 官方源与 BMCLAPI 均可用；Modrinth API/CDN 可用（搜索、版本、文件下载均实测）；CurseForge 无 API Key，未做完整实网验收；`maven.neoforged.net` 在本机被 DNS 污染/不可达，BMCLAPI `/maven/net/neoforged/...` 可用但无 `.sha1`；Quilt Meta/Maven 官方可用且无 BMCLAPI 镜像；`login.microsoftonline.com` 可访问，Azure client ID `<client-id>` 的 `devicecode` 请求成功，但 `login_with_xbox` 返回 `403 Invalid app registration`（Azure 应用未获 Minecraft Services allowlist；账号本身有 Java）。
 - 稳定版发布包：`release\MinecraftLauncher-0.6.3-win64.zip`，13,623,033 字节 / 1007 个条目，SHA-256 `FBFE9A85CA3B697A883F8468923D8004892BBB9B9B3EC7161601378EAC0F54EC`；0.6.2/0.6.1/0.6.0/0.5.4 包保留。**0.7.0 候选未打包。**
-- Git：本机原无 git；已通过 TUNA 镜像安装 PortableGit 2.56.0.4 到 `%LOCALAPPDATA%\Programs\PortableGit`，并把 `cmd` 加入用户 PATH。工作区已 `git init -b main`，70 个文件已 `git add` 暂存；**尚未提交**（缺 `user.name`/`user.email`），也尚未配置远程仓库。
+- Git：本机原无 git；已通过 TUNA 镜像安装 PortableGit 2.56.0.4 到 `%LOCALAPPDATA%\Programs\PortableGit`，并把 `cmd` 加入用户 PATH。工作区已 `git init -b main`，提交 `dc4cadf9720d580d01159f4b0a8ae98dfa47741c`（70 个文件）已推送到 `https://github.com/canmengG/cmmcluncher.git` 的 `main`；提交身份 `canmengG <canmengG@users.noreply.github.com>`。**HTTPS 推送需要 VPN/代理；关闭 VPN 后本次推送成功。**
 - 0.7.0 候选已实现微软登录与 CI，但微软登录被 **Minecraft AppID allowlist** 阻塞（403 `Invalid app registration`）；仍未实现：Java lzma（评估后暂缓）、Linux/macOS、CurseForge `manifest.json`、Forge 旧版本/Java 8 实网验证、队列持久化。不得在文档中把未实现或未实网验收项标为已完成。
 
 ### 0.4 关键文件
