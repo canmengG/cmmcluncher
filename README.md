@@ -303,7 +303,7 @@ CurseForge 可选：点右上“CurseForge Key…”粘贴 API Key（保存在�
 ### 登录微软账户（0.7.0 候选）
 
 1. 先在 Microsoft Entra ID 注册一个应用（免费）：账户类型选“仅个人 Microsoft 账户”或“任何组织目录 + 个人账户”，**Authentication → Allow public client flows = Yes**，不需要 client secret，也不需要 redirect URI；复制 **Application (client) ID**。
-2. **提交 Minecraft AppID 审核**：按 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process) 的说明提交 client ID。未获 allowlist 批准时，最后一步会返回 `403 Invalid app registration`，与账号是否拥有 Java 版无关。
+2. **提交 Minecraft AppID 审核**：按 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process) 的说明提交 client ID 和 Tenant ID。未获 allowlist 批准时，最后一步会返回 `403 Invalid app registration`，与账号是否拥有 Java 版无关。本项目的申请已于 **2026-10-31 提交，等待批准**；批准前无需反复提交。
 3. 回到启动器“启动游戏”页，点 **“微软登录…”**，粘贴 client ID，点“开始登录”。
 4. 浏览器会打开 <https://www.microsoft.com/link>；输入窗口里显示的代码并完成 Microsoft 登录。
 5. 登录成功后，账户行显示微软档案名，玩家名输入框自动锁定；启动游戏会使用正版 UUID、访问令牌和 `userType=msa`。
@@ -622,7 +622,7 @@ ci.ps1
 - **Java lzma 暂未启用**：当前只使用 Mojang 清单里的 `raw` 原文件。实测 lzma 对 Java 17 约省 23%（87 → 67 MB），对 `jre-legacy` 约省 70%（143 → 43 MB），但会增加解压/二次校验路径；本轮不启用，后续按需加入并保留 raw 回退。
 - `jre-legacy` 固定为 Java 8u51，较旧；部分旧版本/模组可能需要更新 Java 8，请手动下载后导入。
 - **微软登录需要自备 Azure client ID**：启动器不内置官方 client ID。需要在 Entra ID 注册公共客户端应用并开启“允许公共客户端流”；登录使用 device code flow，不需要 client secret。
-- **Azure 应用还需要 Mojang allowlist 批准**：仅在 Entra ID 注册应用不够。必须按 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process) 提交 client ID；未批准时 `login_with_xbox` 返回 `403 Invalid app registration`，即使账号拥有 Java 版也无法登录。这是 Minecraft Services 的应用级授权，不是账号问题。
+- **Azure 应用还需要 Mojang allowlist 批准**：仅在 Entra ID 注册应用不够。必须按 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process) 提交 client ID 和 Tenant ID；未批准时 `login_with_xbox` 返回 `403 Invalid app registration`，即使账号拥有 Java 版也无法登录。这是 Minecraft Services 的应用级授权，不是账号问题。**本项目已于 2026-10-31 提交申请，等待批准。**
 - **微软登录的边界**：只支持个人 Microsoft 账户（或包含个人账户的租户）；账号必须拥有 Minecraft Java 版且已完成迁移；儿童账户/无 Xbox 账户会由微软返回明确错误。令牌刷新失败时必须重新登录，不会静默切回离线。微软接口不是公开稳定 API，可能限流或变更。
 - **微软令牌**：刷新令牌使用 Windows DPAPI 加密保存在 `account.dat`；更换 Windows 用户、重装系统后需要重新登录。client ID 是公开标识，不是密钥。
 - 内容下载只支持 Modrinth 和 CurseForge 两个来源，不做聚合；CurseForge 需要用户自己的 API Key，未配置时只能使用 Modrinth。
@@ -742,10 +742,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 
 - **224 个单元/安全测试全部通过**；`py -m compileall -q mc_launcher tests` 通过。新增 22 个测试覆盖设备代码轮询、Xbox/XSTS/Minecraft 令牌链、刷新、错误映射（含 `Invalid app registration`）、DPAPI 往返、`config.json` 不落令牌、启动参数使用正版 UUID/token/`userType=msa`、POST/HTTP 错误体。
 - 用提供的 Azure client ID 实测 `devicecode` 请求成功（返回 `user_code`/`verification_uri`，15 分钟有效）。真实浏览器登录完成：Microsoft/Xbox/XSTS 均通过，最后 `login_with_xbox` 返回 **HTTP 403**，响应体为 `Invalid app registration, see https://aka.ms/AppRegInfo`。账号截图确认拥有 Minecraft: Java，因此原因是 **Azure 应用未获 Minecraft Services allowlist 批准**，不是账号所有权。未保存令牌。
-- 已把该错误改为明确提示，并记录官方 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process)；需要用户提交 client ID 等待批准后再做成功登录/启动验收。
+- 已把该错误改为明确提示，并记录官方 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process)。**申请已于 2026-10-31 提交（Application ID + Tenant ID），等待 allowlist 批准**；批准后再做成功登录/启动验收。
 - UI 冒烟：主窗口创建、账户行“微软登录…/退出登录”状态正确；登录对话框已创建；成功登录待 allowlist 批准后复验。
-- **GitHub Actions 已实际通过**（run `41205056822`）：Unit tests Python 3.11、Python 3.13、PyInstaller package 三个 job 全部 success。Windows runner 的 `RUNNER~1` 短路径曾导致 6 个内容/整合包路径断言失败，已用 `.resolve()` 统一测试根路径修复。
-- 仓库：<https://github.com/canmengG/cmmcluncher>（公开）；`main` 最新提交已推送。
+- **GitHub Actions 已实际通过**（run `41205253957`）：Unit tests Python 3.11、Python 3.13、PyInstaller package 三个 job 全部 success。Windows runner 的 `RUNNER~1` 短路径曾导致 6 个内容/整合包路径断言失败，已用 `.resolve()` 统一测试根路径修复。
+- 仓库：<https://github.com/canmengG/cmmcluncher>（公开）；`main` 最新提交已推送。本机真实 client ID/测试目录等敏感交接信息保存在 `%APPDATA%\MinecraftLauncher\HANDOFF.local.md`，不在仓库。
 
 0.6.3：
 

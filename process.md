@@ -1,14 +1,14 @@
 # 任务交接：Minecraft 本地启动器 + 下载器 + 内容中心
 
 - **更新时间**：2026-10-31 20:30（Asia/Shanghai）
-- **交接版本**：0.6.3 发布包 + 0.7.0 候选（微软登录 / CI）；0.7.0 尚未打包，待用户完成微软实网登录验收
+- **交接版本**：0.6.3 发布包 + 0.7.0 候选（微软登录 / CI）；0.7.0 尚未打包，Mojang AppID 审核已于 2026-10-31 提交，等待 allowlist 批准后完成微软实网登录验收
 - **交接对象**：用户验收 / 下一阶段
 - **工作区**：`<workspace>`
 - **测试游戏目录**：`D:\game\.minecraft`（用户授权修改）；`_download_test\game`、`game-1.6.4`、`game-1.5.2`、`game-26.3`、`java-test`；临时 `build\content-test-game`、`build\cli-test`
-- **当前结论**：0.7.0 候选在 0.6.3 基础上加入 **微软 OAuth 设备代码登录**（`core/msauth.py`、`core/secure_store.py`、GUI/CLI、DPAPI 令牌存储）与 **CI**。**224 个单元/安全测试通过**；`compileall` 通过；用提供的 Azure client ID `<client-id>` 实测 `devicecode` 请求成功，用户完成浏览器登录后 Microsoft/Xbox/XSTS 链通过，但 `login_with_xbox` 返回 **HTTP 403 `Invalid app registration`**：Azure 应用尚未获得 Minecraft Services allowlist 批准，**不是账号没有 Java 版**（用户截图确认拥有 Java）。未保存令牌。需要提交 AppID 审核后再复验；**0.6.3 发布包与 SHA-256 未变**。Java lzma 经实测评估后本轮不启用（见 §6.13）。
+- **当前结论**：0.7.0 候选在 0.6.3 基础上加入 **微软 OAuth 设备代码登录**（`core/msauth.py`、`core/secure_store.py`、GUI/CLI、DPAPI 令牌存储）与 **CI**。**224 个单元/安全测试通过**；`compileall` 通过；GitHub Actions run `41205253957`（3.11/3.13 + PyInstaller）全部 success。真实登录在 `login_with_xbox` 返回 **HTTP 403 `Invalid app registration`**：Azure 应用需要 Minecraft Services allowlist。**2026-10-31 已提交 Mojang AppID 审核，等待批准**；账号本身拥有 Java 版。**0.6.3 发布包与 SHA-256 未变；0.7.0 未打包。** Java lzma 经实测评估后本轮不启用（见 §6.13）；审批后的最终交接见 §6.14。
 - **目标**：Windows 本地 Minecraft 启动器；本地启动 + 官方/镜像下载 + 加载器安装 + 文件校验 + Java 管理 + 内容下载（Mod/整合包/数据包/资源包/光影包）+ 下载队列，不做远程管理。
 
-> **新对话接续提示**：先读 §0 和 [README.md](README.md)。当前发布包 `0.6.3`；源码包含 0.7.0 候选的 **微软登录**（设备代码 + DPAPI）与 **CI**，224 个测试通过；真实登录在 `login_with_xbox` 返回 `403 Invalid app registration`，原因是 Azure 应用未获 Minecraft Services allowlist 批准（账号本身有 Java 版），需先提交 AppID 审核；Java lzma 本轮评估后暂不启用，Linux/macOS、CurseForge `manifest.json` 仍属后续版本。
+> **新对话接续提示**：先读 §0 和 [README.md](README.md)，再读本机 `%APPDATA%\MinecraftLauncher\HANDOFF.local.md`。当前发布包 `0.6.3`；源码包含 0.7.0 候选的 **微软登录**（设备代码 + DPAPI）与 **CI**，224 个测试通过，GitHub Actions 全部 success；真实登录在 `login_with_xbox` 返回 `403 Invalid app registration`（Azure 应用未获 Minecraft Services allowlist，账号本身有 Java 版），**AppID 审核已于 2026-10-31 提交，等待批准**；批准前不要改版本/打包。Java lzma 本轮暂不启用，Linux/macOS、CurseForge `manifest.json` 仍属后续版本。
 
 ---
 
@@ -44,10 +44,10 @@
 - Python：`py` 3.13.9；打包用 `.venv\Scripts\python.exe`（PyInstaller 6.22.3）。
 - Java：`C:\Program Files\Java\jdk-17\bin\java.exe`（1.20.1 / Fabric / Forge / NeoForge legacy 实测）；1.21.11 + NeoForge 21.11.48 实测使用 `C:\Program Files\Java\jdk-22\bin\java.exe`（目标建议 21）；本机另有 Java 8/11/23/27 可用。
 - 启动器下载的 Java 17.0.15：`D:\game\_download_test\java-test\java-runtime-gamma\bin\java.exe`（403 文件 / 86.9 MB）。
-- 网络：Mojang 官方源与 BMCLAPI 均可用；Modrinth API/CDN 可用（搜索、版本、文件下载均实测）；CurseForge 无 API Key，未做完整实网验收；`maven.neoforged.net` 在本机被 DNS 污染/不可达，BMCLAPI `/maven/net/neoforged/...` 可用但无 `.sha1`；Quilt Meta/Maven 官方可用且无 BMCLAPI 镜像；`login.microsoftonline.com` 可访问，Azure client ID `<client-id>` 的 `devicecode` 请求成功，但 `login_with_xbox` 返回 `403 Invalid app registration`（Azure 应用未获 Minecraft Services allowlist；账号本身有 Java）。
+- 网络：Mojang 官方源与 BMCLAPI 均可用；Modrinth API/CDN 可用（搜索、版本、文件下载均实测）；CurseForge 无 API Key，未做完整实网验收；`maven.neoforged.net` 在本机被 DNS 污染/不可达，BMCLAPI `/maven/net/neoforged/...` 可用但无 `.sha1`；Quilt Meta/Maven 官方可用且无 BMCLAPI 镜像；`login.microsoftonline.com` 可访问，Azure client ID `<client-id>` 的 `devicecode` 请求成功，但 `login_with_xbox` 返回 `403 Invalid app registration`（Azure 应用未获 Minecraft Services allowlist；账号本身有 Java）。**AppID 审核已于 2026-10-31 提交，等待批准。**
 - 稳定版发布包：`release\MinecraftLauncher-0.6.3-win64.zip`，13,623,033 字节 / 1007 个条目，SHA-256 `FBFE9A85CA3B697A883F8468923D8004892BBB9B9B3EC7161601378EAC0F54EC`；0.6.2/0.6.1/0.6.0/0.5.4 包保留。**0.7.0 候选未打包。**
 - Git：本机原无 git；已通过 TUNA 镜像安装 PortableGit 2.56.0.4 到 `%LOCALAPPDATA%\Programs\PortableGit`，并把 `cmd` 加入用户 PATH。仓库 `https://github.com/canmengG/cmmcluncher`（公开），`main` 已推送；提交身份 `canmengG <canmengG@users.noreply.github.com>`。GitHub Actions run `41205056822` 的 Python 3.11/3.13 测试与 PyInstaller package 全部 success。因 `github.com:443` 不稳定，remote 使用 SSH，并添加了仓库级写权限 deploy key `Minecraft Launcher push`（本地 `~/.ssh/id_ed25519_canmengG`）；不需要时可在仓库 Settings → Deploy keys 删除。
-- 0.7.0 候选已实现微软登录与 CI，但微软登录被 **Minecraft AppID allowlist** 阻塞（403 `Invalid app registration`）；仍未实现：Java lzma（评估后暂缓）、Linux/macOS、CurseForge `manifest.json`、Forge 旧版本/Java 8 实网验证、队列持久化。不得在文档中把未实现或未实网验收项标为已完成。
+- 0.7.0 候选已实现微软登录与 CI，但微软登录被 **Minecraft AppID allowlist** 阻塞（403 `Invalid app registration`）；**审核已于 2026-10-31 提交，等待批准**。仍未实现：Java lzma（评估后暂缓）、Linux/macOS、CurseForge `manifest.json`、Forge 旧版本/Java 8 实网验证、队列持久化。不得在文档中把未实现或未实网验收项标为已完成。
 
 ### 0.4 关键文件
 
@@ -129,7 +129,7 @@
 | **0.6.1 内容页版本默认值** | **完成** | 沿 `inheritsFrom` 取真正 Minecraft 版本；修复实例 ID（如 `fabulously-optimized-14.1.1`）出现在游戏版本筛选 |
 | **0.6.2 加载器镜像允许列表** | **完成** | Mojang 源下 NeoForge/加载器客户端允许 BMCLAPI Maven；元数据/安装器/依赖回退不再被主机列表拒绝 |
 | **0.6.3 加载器默认隔离** | **完成** | 带 `inheritsFrom` 的版本默认使用 `versions/<版本>/`；NeoForge/Quilt/Forge/Fabric 不再读取共享 `.minecraft/mods` |
-| **0.7.0 微软登录（候选）** | **完成（待实网验收）** | `core/msauth.py` 设备代码/XBL/XSTS/MC/profile/refresh；`core/secure_store.py` DPAPI；GUI 登录对话框、CLI `--login-microsoft`/`--account-info`/`--logout-microsoft`；启动使用正版 UUID/token/`userType=msa`。实网登录在 `login_with_xbox` 返回 `403 Invalid app registration`：Azure 应用未获 Mojang allowlist，账号本身有 Java 版；待提交 AppID 审核后复验 |
+| **0.7.0 微软登录（候选）** | **代码完成；AppID 审核已提交** | `core/msauth.py` 设备代码/XBL/XSTS/MC/profile/refresh；`core/secure_store.py` DPAPI；GUI 登录对话框、CLI `--login-microsoft`/`--account-info`/`--logout-microsoft`；启动使用正版 UUID/token/`userType=msa`。实网登录在 `login_with_xbox` 返回 `403 Invalid app registration`：Azure 应用未获 Mojang allowlist（账号本身有 Java 版）；**2026-10-31 已提交 AppID 审核，等待批准后复验** |
 | **0.7.0 CI（候选）** | **完成（Actions 通过）** | `.github/workflows/ci.yml`（Windows 3.11/3.13 + 测试/compileall + PyInstaller package job）；`ci.ps1` 本地复现；`build.ps1` 支持无 `.venv` 时回退 `python`；run `41205056822` 全部 success |
 | **Java lzma 评估** | **暂不启用** | 实测 Java 17 省 23%、jre-legacy 省 70%；因仅覆盖部分文件且新增解压/校验路径，本轮只记录决策 |
 | 单元/安全测试 | 完成 | **224 个测试通过**（新增 22 个微软登录/网络安全/启动参数测试） |
@@ -885,8 +885,11 @@ Forge 1.12.2 等旧版本需要 Java 8 和旧 installer；当前逻辑会按版�
 - [x] 0.7.0 新增 22 个测试（总计 224）；`compileall` 通过
 - [x] 0.7.0 `.github/workflows/ci.yml`、`ci.ps1`、`build.ps1` Python 回退
 - [x] 0.7.0 README/process 更新
-- [ ] 用户完成微软浏览器登录，并以正版账户启动 1.20.1
-- [ ] 用户确认后打包 0.7.0、更新 SHA-256/exe 冒烟
+- [x] 0.7.0 CI run `41205253957` 全部 success（Python 3.11/3.13 + PyInstaller）
+- [x] 0.7.0 仓库公开并推送 `canmengG/cmmcluncher`
+- [x] 2026-10-31 提交 Mojang Minecraft AppID 审核
+- [ ] 审批通过后完成微软浏览器登录，并以正版账户启动 1.20.1
+- [ ] 登录验收通过后打包 0.7.0、更新 SHA-256/exe 冒烟
 
 ### 6.2 0.5.x 实施结果（0.5.0 → 0.5.3）
 
@@ -1282,23 +1285,58 @@ py .\launcher.py --game-dir "D:\game\.minecraft" --list-versions --details
 - 真实 `devicecode` 请求成功（`https://www.microsoft.com/link`，900 秒有效）；用户完成浏览器登录后，Microsoft/Xbox/XSTS 链通过，`login_with_xbox` 返回 **HTTP 403**，响应体 `{"errorMessage":"Invalid app registration","path":"/authentication/login_with_xbox"}`。账号截图确认拥有 Minecraft: Java，因此原因是 **Azure 应用未获 Minecraft Services allowlist 批准**，不是账号所有权；未保存令牌。代码已把该错误单独映射为可操作提示。
 - CLI `--dry-run`：离线/临时 DPAPI 微软账户两种路径均成功，token 已打码。
 - UI 冒烟：账户行状态正确；登录对话框已创建；完整成功登录待 allowlist 批准后复验。
-- 上传前脱敏：`screenshots/ui.png` 已把玩家名 `<player>` 和 `F:\game...` 替换为 `Steve` / `D:\game\.minecraft`；README/process 的测试路径改为通用路径；真实 client ID 从文档/测试移到 `<client-id>`/假 GUID。
+- 上传前脱敏：`screenshots/ui.png` 已把玩家名 `<玩家名>` 和 `F:\game...` 替换为 `Steve` / `D:\game\.minecraft`；README/process 的测试路径改为通用路径；真实 client ID 从文档/测试移到 `<client-id>`/假 GUID。
 - 未打包 0.7.0；0.6.3 发布包/SHA 未变。
 
-**Minecraft AppID 审核（外部阻塞）**：
+**Minecraft AppID 审核（已提交，等待结果）**：
 
 - 当前官方入口：[Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process)。
 - Microsoft Q&A 上开发者给出的当前申请表单：<https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR-ajEQ1td1ROpz00KtS8Gd5UNVpPTkVLNFVROVQxNkdRMEtXVjNQQjdXVC4u>（来自 2026-08 的 Minelys 案例，提交后由 Mojang Enforcement 邮件确认 allowlist）。
-- 需提交应用名称、Azure client ID、用途、分发方式等；批准前同一个 client ID 始终 403。不要复用其他启动器的 client ID。
-- 批准后无需改代码，直接用 `<client-id>` 重试即可。
+- **2026-10-31 已提交申请**（Application ID + Tenant ID 由用户填写；Tenant ID 未写入仓库）。等待 Mojang Enforcement 的批准邮件/allowlist 生效。
+- 批准前同一个 client ID 始终 403；**不要反复重投**，先检查邮箱（含垃圾箱）和 allowlist 状态。
+- 批准后无需改代码，直接用真实 client ID 重试即可；真实 ID 见本机 `%APPDATA%\MinecraftLauncher\HANDOFF.local.md` 和 `config.json` 的 `ms_client_id`，不在公开仓库。
 
 **剩余 / 下一步**：
 
-1. 按上面入口提交 client ID，等待 allowlist 批准；
-2. 批准后运行 `py .\launcher.py --login-microsoft --ms-client-id <client-id>`；
+1. 等待 allowlist 批准邮件；确认 Application ID 已加入 allowlist；
+2. 批准后运行 `py .\launcher.py --login-microsoft --ms-client-id <真实 client ID>`；
 3. `py .\launcher.py --account-info` 确认账户；GUI 启动 1.20.1 并确认正版服务器/皮肤；
 4. 登录验收通过后升 `APP_VERSION=0.7.0`、打包、更新 SHA-256/exe 冒烟/截图；
 5. 之后再做 Java lzma（可选）、Linux/macOS、CurseForge `manifest.json`、Forge 旧版本/Java 8、队列持久化。
+
+### 6.14 最终交接（2026-10-31，等待 Mojang allowlist）
+
+**当前状态**
+
+- 发布包仍是 `release\MinecraftLauncher-0.6.3-win64.zip`（13,623,033 字节 / 1007 条目 / SHA-256 `FBFE9A85CA3B697A883F8468923D8004892BBB9B9B3EC7161601378EAC0F54EC`）；**0.7.0 未打包、未改 APP_VERSION**。
+- 源码在 0.6.3 基础上新增微软登录、DPAPI 令牌存储、CI；**224 个测试通过**；GitHub Actions run `41205253957` 的 Python 3.11/3.13 测试与 PyInstaller package 全部 success。
+- 公开仓库：<https://github.com/canmengG/cmmcluncher>；`main` 已推送。remote 使用 SSH（`git@github.com:canmengG/cmmcluncher.git`），并添加了仓库级写权限 deploy key `Minecraft Launcher push`（本地 `~/.ssh/id_ed25519_canmengG`）；不需要时可在 Settings → Deploy keys 删除。
+- 本机细节（真实 client ID、测试目录 `<test-game-dir>`、审批状态）在 `%APPDATA%\MinecraftLauncher\HANDOFF.local.md`；该文件不在仓库。`%APPDATA%\MinecraftLauncher\config.json` 的 `ms_client_id` 也已写入真实 client ID。
+- 仓库已脱敏：无真实 token/client secret/account.dat；`screenshots/ui.png` 的 `<玩家名>` 和本地路径已替换；文档用 `<client-id>`，测试用假 GUID。
+
+**新会话接手顺序**
+
+1. 读 `process.md` §0、§1、§2、§6 和 README，再读本机 `%APPDATA%\MinecraftLauncher\HANDOFF.local.md`。
+2. `py -m unittest discover -v`（应为 224 通过）；`py -m compileall -q mc_launcher tests`。
+3. `git status` / `git log --oneline -3`；确认远程 `origin/main` 与本地一致。
+4. 检查审批邮件/allowlist。**未批准前不要改版本号、不要重新打包、不要反复提交申请。**
+5. 批准后按 §6.13 的登录步骤实网验证；成功后再做 0.7.0 发布。
+
+**审批通过后的验收命令**
+
+```powershell
+py .\launcher.py --login-microsoft --ms-client-id "<真实 client ID>"
+py .\launcher.py --account-info
+py .\launcher.py --game-dir "<test-game-dir>" --game-version 1.20.1 --dry-run
+py -m unittest discover -v
+powershell -NoProfile -ExecutionPolicy Bypass -File .\ci.ps1
+```
+
+**禁止/注意**
+
+- 未获 allowlist 前不要把登录失败误判为“账号没有 Java 版”；应检查 `errorMessage` 是否为 `Invalid app registration`。
+- 不要把真实 client ID、`config.json`、`account.dat`、`HANDOFF.local.md` 提交进公开仓库。
+- 0.7.0 打包前必须完成：真实登录成功、正版服务器/皮肤确认、再更新 README/process/截图/SHA-256。
 
 ---
 
@@ -1358,7 +1396,10 @@ py .\launcher.py --game-dir "D:\game\.minecraft" --list-versions --details
 - [x] 0.7.0 候选：微软登录 core/GUI/CLI/DPAPI/22 个测试（总计 224）
 - [x] 0.7.0 候选：CI workflow、`ci.ps1`、`build.ps1` Python 回退
 - [x] 0.7.0 候选：README/process 更新
-- [ ] 0.7.0 候选：用户微软浏览器登录 + 正版 1.20.1 启动复验
+- [x] 0.7.0 候选：GitHub Actions run `41205253957` 全部 success
+- [x] 0.7.0 候选：仓库公开并推送 `canmengG/cmmcluncher`
+- [x] 2026-10-31 提交 Mojang Minecraft AppID 审核
+- [ ] 0.7.0 候选：审批通过后微软浏览器登录 + 正版 1.20.1 启动复验
 - [ ] 0.7.0 打包/SHA-256/exe 冒烟（登录验收后）
 - [x] 任务列表已清空（§0.5）
 - [x] 非沙箱双击 0.4.0 exe 完整复验（用户确认）
