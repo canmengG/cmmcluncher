@@ -1,0 +1,189 @@
+[
+  {
+    "game_versions": [
+      "1.20.1"
+    ],
+    "loaders": [
+      "fabric"
+    ],
+    "environment": "client_or_server_prefers_both",
+    "id": "YRfUnbXb",
+    "project_id": "u6dRKJwZ",
+    "author_id": "nMXRSbhF",
+    "featured": false,
+    "name": "15.56.0.205 for Fabric 1.20.1",
+    "version_number": "15.56.0.205",
+    "changelog": "  * [Fix #4461 legacy tooltips should not be given blank lines](https://github.com/mezz/JustEnoughItems/commit/37f996f67082e6b37ca3290a7b7963d64b87b294) - mezz\n",
+    "changelog_url": null,
+    "date_published": "2026-08-31T13:57:16.177791Z",
+    "downloads": 88405,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "l79YLx3J",
+        "hashes": {
+          "sha1": "a6da54263039e893b0fb408f6bda6484c7a3c9e2",
+          "sha512": "a97fb79c919bddfb26cae5761431ee6396e949525e8df862fa56b23e5aab3600f556d9419228282cd2b866431d6e0b14e1a596b563feabd1ec60e52679a659f3"
+        },
+        "url": "https://cdn.modrinth.com/data/u6dRKJwZ/versions/YRfUnbXb/jei-1.20.1-fabric-15.56.0.205.jar",
+        "filename": "jei-1.20.1-fabric-15.56.0.205.jar",
+        "primary": true,
+        "size": 1801469,
+        "file_type": null
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "game_versions": [
+      "1.20.1"
+    ],
+    "loaders": [
+      "fabric"
+    ],
+    "environment": "client_or_server_prefers_both",
+    "id": "qrP02aGf",
+    "project_id": "u6dRKJwZ",
+    "author_id": "nMXRSbhF",
+    "featured": false,
+    "name": "15.74.0.233 for Fabric 1.20.1",
+    "version_number": "15.74.0.233",
+    "changelog": "  * [Update brewing stand potion](https://github.com/mezz/JustEnoughItems/commit/50003322ac47427fc37e7ac77e4d6a0aa2e3dc24) - mezz\n",
+    "changelog_url": null,
+    "date_published": "2026-10-29T13:55:56.913846Z",
+    "downloads": 4282,
+    "version_type": "beta",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "MuJeje0N",
+        "hashes": {
+          "sha512": "9bf63bb84f4a46dc37767bdc96f8e3bbdc4b9de92f5b85df57800a8b8c39e1061d44c502b7cf191ca3d5ef6dcfc1b521bcd9f40dbe485e54e5910b72cfd143d3",
+          "sha1": "40636407b6de9397321b8ac74778ce0d52de7376"
+        },
+        "url": "https://cdn.modrinth.com/data/u6dRKJwZ/versions/qrP02aGf/jei-1.20.1-fabric-15.74.0.233.jar",
+        "filename": "jei-1.20.1-fabric-15.74.0.233.jar",
+        "primary": true,
+        "size": 4818521,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "BOHUKqOz",
+        "file_name": null,
+        "dependency_type": "optional"
+      },
+      {
+        "version_id": null,
+        "project_id": "7tEfOcA7",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.20.1"
+    ],
+    "loaders": [
+      "fabric"
+    ],
+    "environment": "client_or_server_prefers_both",
+    "id": "OD2nKmIh",
+    "project_id": "u6dRKJwZ",
+    "author_id": "nMXRSbhF",
+    "featured": false,
+    "name": "15.74.0.232 for Fabric 1.20.1",
+    "version_number": "15.74.0.232",
+    "changelog": "  * [Report disconnect reasons in external server tests](https://github.com/mezz/JustEnoughItems/commit/cc98a6e692159284eecc251533cec6aa7471019c) - mezz\n  * [Fix #4582 search focus hotkey typing](https://github.com/mezz/JustEnoughItems/commit/a11970422ffcb4255ebf35193f8d86087fd82300) - mezz\n",
+    "changelog_url": null,
+    "date_published": "2026-10-28T14:10:46.635771Z",
+    "downloads": 2345,
+    "version_type": "beta",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "CbQqubVv",
+        "hashes": {
+          "sha512": "23ec2d4d131eeb5b972460e6b58aaa2c50bb08d350fd498e3a92c2cb4810bd0f971fc463f42c2a4d37d8135dcb84527ada003e439be8c347643d7845452190de",
+          "sha1": "2e5c546f3c49ac6d456244cefd609970b2dd9723"
+        },
+        "url": "https://cdn.modrinth.com/data/u6dRKJwZ/versions/OD2nKmIh/jei-1.20.1-fabric-15.74.0.232.jar",
+        "filename": "jei-1.20.1-fabric-15.74.0.232.jar",
+        "primary": true,
+        "size": 4818471,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "BOHUKqOz",
+        "file_name": null,
+        "dependency_type": "optional"
+      },
+      {
+        "version_id": null,
+        "project_id": "7tEfOcA7",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.20.1"
+    ],
+    "loaders": [
+      "fabric"
+    ],
+    "environment": "client_or_server_prefers_both",
+    "id": "NKdcms4C",
+    "project_id": "u6dRKJwZ",
+    "author_id": "nMXRSbhF",
+    "featured": false,
+    "name": "15.74.0.230 for Fabric 1.20.1",
+    "version_number": "15.74.0.230",
+    "changelog": "  * [Close #4540 Add keyboard navigation to the ingredient list](https://github.com/mezz/JustEnoughItems/commit/6bb939394058311e408bde8fd05567a622cd8afb) - mezz\n  * [Reset search history bindings in keyboard navigation tests](https://github.com/mezz/JustEnoughItems/commit/115735fea13405f223f0444b996e542b0c03549c) - mezz\n  * [Use child widgets instead of ReflectionUtil to get text boxes](https://github.com/mezz/JustEnoughItems/commit/6c17f130c85e26fc25ba9ed358a21eb41b02bcbe) - mezz\n  * [Enable R8 dependency shrinking for JEI jars](https://github.com/mezz/JustEnoughItems/commit/387a537fed2a159d6fb8f227554e3627343d7108) - mezz\n",
+    "changelog_url": null,
+    "date_published": "2026-10-25T15:32:55.979402Z",
+    "downloads": 13946,
+    "version_type": "beta",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "zf9fMXt9",
+        "hashes": {
+          "sha1": "e23ae7e4cbb57098d233d4490a95d33fd350c573",
+          "sha512": "446a07e1458125bfb0872857aa4c72492d658cca88b955c75eaf66ff9629d451c307c53cc02faff01d07acb0e22cb43b100f43a18c93c042852795cc3f658167"
+        },
+        "url": "https://cdn.modrinth.com/data/u6dRKJwZ/versions/NKdcms4C/jei-1.20.1-fabric-15.74.0.230.jar",
+        "filename": "jei-1.20.1-fabric-15.74.0.230.jar",
+        "primary": true,
+        "size": 4818377,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "BOHUKqOz",
+        "file_name": null,
+        "dependency_type": "optional"
+      },
+      {
+        "version_id": null,
+        "project_id": "7tEfOcA7",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  }
+]

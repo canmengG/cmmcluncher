@@ -1,0 +1,14 @@
+.venv/
+.tools/
+build/
+dist/
+release/
+__pycache__/
+*.py[cod]
+tests/_work/
+screenshots/*.tmp
+scratch/
+*.spec
+forge-installer.jar.log
+debug.log
+version_manifest_v2.json

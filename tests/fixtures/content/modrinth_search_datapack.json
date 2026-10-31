@@ -1,0 +1,213 @@
+{
+  "hits": [
+    {
+      "project_id": "8oi3bsk5",
+      "project_type": "mod",
+      "all_project_types": [
+        "datapack",
+        "mod"
+      ],
+      "slug": "terralith",
+      "author": "Starmute",
+      "author_id": "oRXQvVNJ",
+      "organization": "Stardust Labs",
+      "organization_id": "xdGr4sFb",
+      "title": "Terralith",
+      "description": "Explore almost 100 new biomes consisting of both realism and light fantasy, using just Vanilla blocks. Complete with several immersive structures to compliment the overhauled terrain.",
+      "categories": [
+        "datapack",
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt",
+        "worldgen"
+      ],
+      "display_categories": [
+        "datapack",
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt",
+        "worldgen"
+      ],
+      "versions": [
+        "1.18.2",
+        "1.19",
+        "1.19.1",
+        "1.19.2",
+        "1.19.3",
+        "1.19.4",
+        "1.20",
+        "1.20.1",
+        "1.20.2",
+        "1.20.3",
+        "1.20.4",
+        "1.20.5",
+        "1.20.6",
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "downloads": 25289238,
+      "follows": 8966,
+      "icon_url": "https://cdn.modrinth.com/data/8oi3bsk5/1959d924a1088944bbf07a06ba523726112d7e7a_96.webp",
+      "date_created": "2022-11-23T01:21:11.804610+00:00",
+      "date_modified": "2026-09-27T20:51:12.661098+00:00",
+      "latest_version": "WeYhEb5d",
+      "license": "LicenseRef-Stardust-Labs-License",
+      "client_side": "optional",
+      "server_side": "required",
+      "environment": [
+        "server_only"
+      ],
+      "disclosure_types": [
+        "advertisements"
+      ],
+      "gallery": [
+        "https://cdn.modrinth.com/data/8oi3bsk5/images/4957da7c3da1386fb12b76001a2321be7b2ff9bc_350.webp",
+        "https://cdn.modrinth.com/data/8oi3bsk5/images/c5b10dfed4a506559d2e2081821e99e1f5b66794_350.webp",
+        "https://cdn.modrinth.com/data/8oi3bsk5/images/c4168f5d280c85e0e3d050bb8f3bc776fd0762d4_350.webp"
+      ],
+      "featured_gallery": null,
+      "color": 4996660
+    },
+    {
+      "project_id": "oTQsXi8U",
+      "project_type": "mod",
+      "all_project_types": [
+        "datapack",
+        "mod"
+      ],
+      "slug": "terralith-restoned",
+      "author": "Starmute",
+      "author_id": "oRXQvVNJ",
+      "organization": "Stardust Labs",
+      "organization_id": "xdGr4sFb",
+      "title": "Terralith: ReStoned",
+      "description": "An official add-on to Terralith that re-adds normal Andesite, Diorite, and Granite blobs underground",
+      "categories": [
+        "datapack",
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt",
+        "worldgen"
+      ],
+      "display_categories": [
+        "datapack",
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt",
+        "worldgen"
+      ],
+      "versions": [
+        "1.20",
+        "1.20.1",
+        "1.20.2",
+        "1.20.3",
+        "1.20.4",
+        "1.20.5",
+        "1.20.6",
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "downloads": 351074,
+      "follows": 118,
+      "icon_url": "https://cdn.modrinth.com/data/oTQsXi8U/b14de148c7bbdf1654aba83052554b2e6e97a990.png",
+      "date_created": "2025-01-17T06:39:02.687418+00:00",
+      "date_modified": "2026-03-29T14:09:36.050108+00:00",
+      "latest_version": "9wwdRqkT",
+      "license": "MIT",
+      "client_side": "optional",
+      "server_side": "required",
+      "environment": [
+        "server_only"
+      ],
+      "disclosure_types": [],
+      "gallery": [],
+      "featured_gallery": null,
+      "color": 4802889
+    },
+    {
+      "project_id": "Ys1mdL6V",
+      "project_type": "mod",
+      "all_project_types": [
+        "datapack",
+        "mod"
+      ],
+      "slug": "treeplacer-terralith-addon",
+      "author": "FusionSwarly",
+      "author_id": "oApKYvvP",
+      "organization": null,
+      "organization_id": null,
+      "title": "Treeplacer - Terralith Addon",
+      "description": "Adds biome specific sapling functionality for Terralith",
+      "categories": [
+        "datapack",
+        "fabric",
+        "forge",
+        "utility",
+        "worldgen"
+      ],
+      "display_categories": [
+        "datapack",
+        "fabric",
+        "forge",
+        "utility",
+        "worldgen"
+      ],
+      "versions": [
+        "1.19.2",
+        "1.20.1"
+      ],
+      "downloads": 54640,
+      "follows": 104,
+      "icon_url": "https://cdn.modrinth.com/data/Ys1mdL6V/7e1e2d68ea6ac0d690d43f3cd82b66b336d02d9f_96.webp",
+      "date_created": "2023-03-23T01:59:59.805335+00:00",
+      "date_modified": "2023-11-09T04:47:15.267298+00:00",
+      "latest_version": "bL4G2w16",
+      "license": "MIT",
+      "client_side": "optional",
+      "server_side": "required",
+      "environment": [
+        "server_only"
+      ],
+      "disclosure_types": [],
+      "gallery": [],
+      "featured_gallery": null,
+      "color": 4934177
+    }
+  ],
+  "offset": 0,
+  "limit": 3,
+  "total_hits": 13
+}

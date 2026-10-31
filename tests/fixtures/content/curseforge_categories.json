@@ -1,0 +1,7 @@
+{
+  "data": [
+    {"id": 423, "name": "Map and Information", "slug": "map-information", "classId": 6},
+    {"id": 424, "name": "API and Library", "slug": "api-library", "classId": 6},
+    {"id": 425, "name": "Adventure and RPG", "slug": "adventure-rpg", "classId": 6}
+  ]
+}

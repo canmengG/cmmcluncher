@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Unit tests (Python ${{ matrix.python-version }})
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Unit tests
+        run: python -m unittest discover -v
+      - name: Byte-compile
+        run: python -m compileall -q mc_launcher tests
+
+  package:
+    name: PyInstaller package
+    runs-on: windows-latest
+    needs: test
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install PyInstaller
+        run: python -m pip install -r requirements-dev.txt
+      - name: Build onedir
+        shell: pwsh
+        run: .\build.ps1 -NoZip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MinecraftLauncher-win64
+          path: dist/MinecraftLauncher
+          if-no-files-found: error

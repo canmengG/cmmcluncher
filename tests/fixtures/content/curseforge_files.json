@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "id": 5555555,
+      "gameId": 432,
+      "modId": 238222,
+      "displayName": "jei-1.20.1-forge-15.56.0.205.jar",
+      "fileName": "jei-1.20.1-forge-15.56.0.205.jar",
+      "releaseType": 1,
+      "fileDate": "2026-10-29T13:55:56Z",
+      "fileLength": 1234567,
+      "downloadCount": 98765,
+      "downloadUrl": "https://edge.forgecdn.net/files/5555/555/jei-1.20.1-forge-15.56.0.205.jar",
+      "hashes": [
+        {"value": "0123456789abcdef0123456789abcdef01234567", "algo": 1}
+      ],
+      "gameVersions": ["1.20.1", "Forge", "Java 17"],
+      "dependencies": [
+        {"modId": 306612, "relationType": 3}
+      ]
+    },
+    {
+      "id": 5555556,
+      "gameId": 432,
+      "modId": 238222,
+      "displayName": "jei-1.20.1-forge-15.56.0.206.jar",
+      "fileName": "jei-1.20.1-forge-15.56.0.206.jar",
+      "releaseType": 2,
+      "fileDate": "2026-10-30T10:00:00Z",
+      "fileLength": 1234568,
+      "downloadCount": 1234,
+      "downloadUrl": null,
+      "hashes": [],
+      "gameVersions": ["1.20.1", "Forge"],
+      "dependencies": []
+    }
+  ],
+  "pagination": {"totalCount": 2, "pageSize": 50, "index": 0}
+}
