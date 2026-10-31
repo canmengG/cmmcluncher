@@ -744,7 +744,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 - 用提供的 Azure client ID 实测 `devicecode` 请求成功（返回 `user_code`/`verification_uri`，15 分钟有效）。真实浏览器登录完成：Microsoft/Xbox/XSTS 均通过，最后 `login_with_xbox` 返回 **HTTP 403**，响应体为 `Invalid app registration, see https://aka.ms/AppRegInfo`。账号截图确认拥有 Minecraft: Java，因此原因是 **Azure 应用未获 Minecraft Services allowlist 批准**，不是账号所有权。未保存令牌。
 - 已把该错误改为明确提示，并记录官方 [Java Edition Game Service API Review or Application Process](https://help.minecraft.net/hc/en-us/articles/16254801392141-Java-Edition-Game-Service-API-Review-or-Application-Process)。**申请已于 2026-10-31 提交（Application ID + Tenant ID），等待 allowlist 批准**；批准后再做成功登录/启动验收。
 - UI 冒烟：主窗口创建、账户行“微软登录…/退出登录”状态正确；登录对话框已创建；成功登录待 allowlist 批准后复验。
-- **GitHub Actions 已实际通过**（run `41205253957`）：Unit tests Python 3.11、Python 3.13、PyInstaller package 三个 job 全部 success。Windows runner 的 `RUNNER~1` 短路径曾导致 6 个内容/整合包路径断言失败，已用 `.resolve()` 统一测试根路径修复。
+- **GitHub Actions 已实际通过**（run `41206762835`）：Unit tests Python 3.11、Python 3.13、PyInstaller package 三个 job 全部 success。Windows runner 的 `RUNNER~1` 短路径曾导致 6 个内容/整合包路径断言失败，已用 `.resolve()` 统一测试根路径修复。
 - 仓库：<https://github.com/canmengG/cmmcluncher>（公开）；`main` 最新提交已推送。本机真实 client ID/测试目录等敏感交接信息保存在 `%APPDATA%\MinecraftLauncher\HANDOFF.local.md`，不在仓库。
 
 0.6.3：
